@@ -79,6 +79,27 @@ GROUP BY group_type;
 ![ROAS by group type](https://raw.githubusercontent.com/AtifElmasry/ad-bidding-ab-test-zalando-case-study/main/outputs/roas_by_group_boxplot.png)
 
 ---
+## 🧠 Final Takeaways
+
+This A/B test compared **manual vs automated ad bidding** strategies across several key marketing KPIs. Here's what we learned:
+
+- 📈 **CTR & CVR**: Both groups performed similarly on click-through and conversion rates, indicating neither strategy had a clear edge in driving clicks or converting them.
+
+- 💸 **ROAS & CAC**:
+  - On average, **manual bidding** delivered slightly better ROAS and lower CAC.
+  - However, **automated bidding** showed **higher variability**, suggesting it can perform very well in some campaigns — but isn’t always consistent.
+
+- 🔍 **Top-performing campaigns** were mostly found in the **manual group**, reinforcing the idea that manual control may be better optimized in certain cases.
+
+- 📆 **Daily trends** showed that automated bidding sometimes spikes in performance early on, but then stabilizes, possibly due to its learning phase or budget pacing.
+
+### ✅ Overall Conclusion:
+
+If consistency and control are important, **manual bidding** may be the safer bet. But if the goal is to scale fast and test more aggressively, **automated bidding** has potential — especially with proper monitoring and thresholds.
+
+A **hybrid strategy** might be best: start automated for scale, then switch high-potential campaigns to manual for fine-tuning.
+
+---
 
 ## ▶️ How to Try It Yourself
 
