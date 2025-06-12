@@ -67,16 +67,16 @@ GROUP BY group_type;
 ## 📸 Some Visuals I Made
 
 ### ROAS & CAC Boxplots
-![ROAS and CAC comparison](outputs/roas_cac_comparison.png)
+![ROAS and CAC comparison](https://raw.githubusercontent.com/AtifElmasry/ad-bidding-ab-test-zalando-case-study/main/outputs/roas_cac_comparison.png)
 
 ### Daily Conversions Trend
-![Daily conversions](outputs/daily_conversions.png)
+![Daily conversions](https://raw.githubusercontent.com/AtifElmasry/ad-bidding-ab-test-zalando-case-study/main/outputs/daily_conversions.png)
 
 ### Top 5 Campaigns by ROAS
-![Top 5 campaigns](outputs/top5_campaigns_roas.png)
+![Top 5 campaigns](https://raw.githubusercontent.com/AtifElmasry/ad-bidding-ab-test-zalando-case-study/main/outputs/top5_campaigns_roas.png)
 
 ### ROAS by Group Type
-![ROAS by group type](outputs/roas_by_group_boxplot.png)
+![ROAS by group type](https://raw.githubusercontent.com/AtifElmasry/ad-bidding-ab-test-zalando-case-study/main/outputs/roas_by_group_boxplot.png)
 
 ---
 
