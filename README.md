@@ -1,8 +1,8 @@
 # 🎯 Ad Bidding A/B Test – Zalando Case Study
 
-This is a fun and realistic A/B testing project where we analyze how two different ad bidding strategies—manual vs automated—perform across core marketing KPIs.
+This is a fun and realistic A/B testing project where I analyze how two different ad bidding strategies—manual vs automated—perform across core marketing KPIs.
 
-It's designed to reflect the kind of work a data analyst might do at a performance-driven company like Zalando.
+It's designed to reflect the kind of work a data analyst might do at a performance-driven company like **Zalando**.
 
 ---
 
@@ -40,7 +40,7 @@ project/
 
 ---
 
-## 🔍 Insights We Found
+## 🔍 Insights I Found
 
 - ROAS and CAC were **pretty close** between the two groups.
 - The **test group (automated bidding)** had more variability in conversions, but peaked early.
@@ -49,7 +49,7 @@ project/
 
 ---
 
-## 🧠 Example SQL Query We Ran
+## 🧠 Example SQL Query I Ran
 
 ```sql
 SELECT
@@ -64,11 +64,19 @@ GROUP BY group_type;
 
 ---
 
-## 📸 Some Visuals We Made
+## 📸 Some Visuals I Made
 
-- `outputs/roas_cac_comparison.png` – ROAS & CAC boxplot (outputs/roas_cac_comparison.png)
-- `outputs/daily_conversions.png` – Daily trend of conversions
-- `outputs/top5_campaigns_roas.png` – Best campaigns by ROAS
+### ROAS & CAC Boxplots
+![ROAS and CAC comparison](outputs/roas_cac_comparison.png)
+
+### Daily Conversions Trend
+![Daily conversions](outputs/daily_conversions.png)
+
+### Top 5 Campaigns by ROAS
+![Top 5 campaigns](outputs/top5_campaigns_roas.png)
+
+### ROAS by Group Type
+![ROAS by group type](outputs/roas_by_group_boxplot.png)
 
 ---
 
