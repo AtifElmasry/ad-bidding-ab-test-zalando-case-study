@@ -66,7 +66,7 @@ GROUP BY group_type;
 
 ## 📸 Some Visuals We Made
 
-- `outputs/roas_cac_comparison.png` – ROAS & CAC boxplot
+- `../outputs/roas_cac_comparison.png` – ROAS & CAC boxplot
 - `outputs/daily_conversions.png` – Daily trend of conversions
 - `outputs/top5_campaigns_roas.png` – Best campaigns by ROAS
 
