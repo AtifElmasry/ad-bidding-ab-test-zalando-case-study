@@ -2,7 +2,7 @@
 
 This is a fun and realistic A/B testing project where I analyze how two different ad bidding strategies—manual vs automated—perform across core marketing KPIs.
 
-It's designed to reflect the kind of work a data analyst might do at a performance-driven company like **Zalando**.
+It's designed to reflect the kind of work a data analyst might do at a performance-driven company.
 
 ---
 
