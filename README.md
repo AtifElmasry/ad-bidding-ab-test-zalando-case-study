@@ -1,4 +1,4 @@
-# 🎯 Ad Bidding A/B Test – Zalando Case Study
+# 🎯 Ad Bidding A/B Test
 
 This is a fun and realistic A/B testing project where I analyze how two different ad bidding strategies—manual vs automated—perform across core marketing KPIs.
 
