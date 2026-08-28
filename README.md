@@ -1,122 +1,81 @@
-# 🎯 Ad Bidding A/B Test
+# Ad Bidding A/B Test Analysis
 
-This is a fun and realistic A/B testing project where I analyze how two different ad bidding strategies—manual vs automated—perform across core marketing KPIs.
+A case study comparing manual and automated ad-bidding strategies across four performance-marketing KPIs: click-through rate, conversion rate, return on ad spend and customer acquisition cost.
 
-It's designed to reflect the kind of work a data analyst might do at a performance-driven company.
+> The dataset is simulated. The project demonstrates analytical workflow and decision-making rather than a production experiment.
 
----
+## Business question
 
-## 🧪 What’s the Goal?
+Should a marketing team favor manual or automated bidding, and what trade-offs should it consider when choosing between control, consistency and scale?
 
-We want to see which bidding strategy works better based on:
+## Approach
 
-- 📈 CTR: Click-Through Rate
-- ✅ CVR: Conversion Rate
-- 💸 ROAS: Return on Ad Spend
-- 🧮 CAC: Customer Acquisition Cost
+1. Generated and prepared campaign-level data.
+2. Aggregated campaign KPIs in SQL.
+3. Compared group distributions and daily performance in Python.
+4. Reviewed top-performing campaigns and variability between strategies.
+5. Translated the results into an operating recommendation.
 
----
+## KPI definitions
 
-## 🛠️ What Did I Use?
+| KPI | Calculation |
+|---|---|
+| CTR | Clicks ÷ impressions |
+| CVR | Conversions ÷ clicks |
+| ROAS | Revenue ÷ advertising spend |
+| CAC | Advertising spend ÷ conversions |
 
-- **Python** – for data analysis, visualizations, and A/B test checks.
-- **SQL (MySQL)** – to crunch campaign metrics.
-- **Jupyter Notebook** – to walk through the whole analysis.
-- **MySQL Workbench** – for SQL queries and KPIs.
+## Findings
 
----
+- CTR and CVR were similar across the two groups.
+- Manual bidding produced slightly better average ROAS and lower CAC.
+- Automated bidding showed greater variability and occasional early performance spikes.
+- Most of the top campaigns by ROAS were in the manual group.
 
-## 📁 Folder Tour
+The observed differences should be treated as directional. A production decision would require a pre-defined hypothesis, power analysis, confidence intervals and significance testing.
 
-```
-project/
-├── data/           → Clean campaign dataset (.csv)
-├── scripts/        → Python script to generate dummy data
-├── notebooks/      → Main Jupyter analysis notebook
-├── outputs/        → Visualizations saved as .png
-├── sql/            → SQL query for KPI aggregation
-├── README.md       → You’re reading it :)
-```
+## Recommendation
 
----
+Use manual bidding when consistency and direct control are priorities. Automated bidding may be useful for rapid scaling and exploration, provided performance thresholds are monitored. A practical next test would use automation for discovery and apply manual optimization to campaigns that cross an agreed performance threshold.
 
-## 🔍 Insights I Found
+## Repository structure
 
-- ROAS and CAC were **pretty close** between the two groups.
-- The **test group (automated bidding)** had more variability in conversions, but peaked early.
-- **Manual bidding** had a few standout campaigns (best ROAS), but overall the results were mixed.
-- This suggests that a **hybrid approach** might be worth exploring.
-
----
-
-## 🧠 Example SQL Query I Ran
-
-```sql
-SELECT
-  group_type,
-  ROUND(SUM(clicks) / SUM(impressions), 4) AS CTR,
-  ROUND(SUM(conversions) / SUM(clicks), 4) AS CVR,
-  ROUND(SUM(revenue_eur) / SUM(spend_eur), 2) AS ROAS,
-  ROUND(SUM(spend_eur) / SUM(conversions), 2) AS CAC
-FROM ad_data
-GROUP BY group_type;
+```text
+data/       Clean campaign dataset
+notebooks/  Main analysis notebook
+outputs/    Generated visualizations
+scripts/    Data-generation script
+sql/        KPI aggregation query
 ```
 
----
+## Selected visualizations
 
-## 📸 Some Visuals I Made
+### ROAS and CAC distributions
 
-### ROAS & CAC Boxplots
-![ROAS and CAC comparison](https://raw.githubusercontent.com/AtifElmasry/ad-bidding-ab-test-zalando-case-study/main/outputs/roas_cac_comparison.png)
+![ROAS and CAC comparison](outputs/roas_cac_comparison.png)
 
-### Daily Conversions Trend
-![Daily conversions](https://raw.githubusercontent.com/AtifElmasry/ad-bidding-ab-test-zalando-case-study/main/outputs/daily_conversions.png)
+### Daily conversions
 
-### Top 5 Campaigns by ROAS
-![Top 5 campaigns](https://raw.githubusercontent.com/AtifElmasry/ad-bidding-ab-test-zalando-case-study/main/outputs/top5_campaigns_roas.png)
+![Daily conversions](outputs/daily_conversions.png)
 
-### ROAS by Group Type
-![ROAS by group type](https://raw.githubusercontent.com/AtifElmasry/ad-bidding-ab-test-zalando-case-study/main/outputs/roas_by_group_boxplot.png)
+### Highest-ROAS campaigns
 
----
-## 🧠 Final Takeaways
+![Top campaigns by ROAS](outputs/top5_campaigns_roas.png)
 
-This A/B test compared **manual vs automated ad bidding** strategies across several key marketing KPIs. Here's what we learned:
+## Reproduce the analysis
 
-- 📈 **CTR & CVR**: Both groups performed similarly on click-through and conversion rates, indicating neither strategy had a clear edge in driving clicks or converting them.
+```bash
+git clone https://github.com/AtifElmasry/ad-bidding-ab-test-zalando-case-study.git
+cd ad-bidding-ab-test-zalando-case-study
+pip install -r requirements.txt
+```
 
-- 💸 **ROAS & CAC**:
-  - On average, **manual bidding** delivered slightly better ROAS and lower CAC.
-  - However, **automated bidding** showed **higher variability**, suggesting it can perform very well in some campaigns — but isn’t always consistent.
+Open `notebooks/analysis.ipynb`, or review `sql/campaign_kpi_analysis.sql`.
 
-- 🔍 **Top-performing campaigns** were mostly found in the **manual group**, reinforcing the idea that manual control may be better optimized in certain cases.
+## Tools
 
-- 📆 **Daily trends** showed that automated bidding sometimes spikes in performance early on, but then stabilizes, possibly due to its learning phase or budget pacing.
+Python, pandas, Seaborn, SQL, MySQL and Jupyter Notebook
 
-### ✅ Overall Conclusion:
+## Author
 
-If consistency and control are important, **manual bidding** may be the safer bet. But if the goal is to scale fast and test more aggressively, **automated bidding** has potential — especially with proper monitoring and thresholds.
-
-A **hybrid strategy** might be best: start automated for scale, then switch high-potential campaigns to manual for fine-tuning.
-
----
-
-## ▶️ How to Try It Yourself
-
-1. Clone the repo
-2. Run `pip install -r requirements.txt`
-3. Open `notebooks/analysis.ipynb`
-4. Or, explore the SQL in `sql/campaign_kpi_analysis.sql`
-
----
-
-## ✍️ About Me
-
-**Atif Elmasry**  
-Product & Data Analyst | SQL + Python | Performance Marketing  
-📍 Based in Berlin  
-📫 Find me on [LinkedIn](https://www.linkedin.com/in/tioatifelmasry)
-
----
-
-> If you're a hiring manager or interviewer, I’d love to walk you through this project live and talk through my thought process.
+[Atif Elmasry](https://github.com/AtifElmasry) · [LinkedIn](https://www.linkedin.com/in/tioatifelmasry/)
