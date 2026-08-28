@@ -1,80 +1,88 @@
-# Ad Bidding A/B Test Analysis
+# Product Experimentation: Upworthy Headline A/B Tests
 
-A case study comparing manual and automated ad-bidding strategies across four performance-marketing KPIs: click-through rate, conversion rate, return on ad spend and customer acquisition cost.
+An end-to-end experimentation project using the **Upworthy Research Archive**, a real collection of randomized headline and image experiments conducted from 2013 to 2015.
 
-> The dataset is simulated. The project demonstrates analytical workflow and decision-making rather than a production experiment.
+The archive contains 32,487 experiments, 150,817 experiment arms and more than 538 million participant assignments. This project focuses on decision quality: traffic validation, uncertainty, effect size and multiple-comparison control—not simply selecting the highest observed CTR.
 
 ## Business question
 
-Should a marketing team favor manual or automated bidding, and what trade-offs should it consider when choosing between control, consistency and scale?
+How should a content or growth team decide whether an experimental variant is reliable enough to ship?
 
-## Approach
+## Dataset
 
-1. Generated and prepared campaign-level data.
-2. Aggregated campaign KPIs in SQL.
-3. Compared group distributions and daily performance in Python.
-4. Reviewed top-performing campaigns and variability between strategies.
-5. Translated the results into an operating recommendation.
+- **Source:** [Upworthy Research Archive](https://osf.io/jd64p/)
+- **Documentation:** [Archive methodology and data dictionary](https://upworthy.natematias.com/about-the-archive.html)
+- **Research paper:** [Scientific Data, 2021](https://doi.org/10.1038/s41597-021-00934-7)
+- **License:** CC BY 4.0
+- **Unit of analysis:** headline/image package within a randomized test
+- **Primary metric:** click-through rate (clicks ÷ impressions)
 
-## KPI definitions
+The archive maintainers reported randomization concerns affecting some tests from June 2013 to January 2014. Any confirmatory use should follow their current guidance and exclude or flag experiments carrying randomization-imbalance risk.
 
-| KPI | Calculation |
+Data is downloaded from the original archive and is not committed to this repository.
+
+## Analytical framework
+
+1. Validate required fields and remove zero-impression arms.
+2. Check traffic allocation with a sample-ratio-mismatch test.
+3. Calculate CTR and Wilson confidence intervals for every arm.
+4. Compare variants with a preselected control using two-proportion z-tests.
+5. Apply Holm correction when an experiment has multiple variants.
+6. Report absolute lift, relative lift and adjusted statistical significance.
+7. Separate statistical evidence from the final product recommendation.
+
+## Decision table
+
+| Check | Why it matters |
 |---|---|
-| CTR | Clicks ÷ impressions |
-| CVR | Conversions ÷ clicks |
-| ROAS | Revenue ÷ advertising spend |
-| CAC | Advertising spend ÷ conversions |
-
-## Findings
-
-- CTR and CVR were similar across the two groups.
-- Manual bidding produced slightly better average ROAS and lower CAC.
-- Automated bidding showed greater variability and occasional early performance spikes.
-- Most of the top campaigns by ROAS were in the manual group.
-
-The observed differences should be treated as directional. A production decision would require a pre-defined hypothesis, power analysis, confidence intervals and significance testing.
-
-## Recommendation
-
-Use manual bidding when consistency and direct control are priorities. Automated bidding may be useful for rapid scaling and exploration, provided performance thresholds are monitored. A practical next test would use automation for discovery and apply manual optimization to campaigns that cross an agreed performance threshold.
+| Sample-ratio mismatch | Detects allocation or instrumentation problems |
+| Confidence interval | Shows uncertainty around CTR |
+| Absolute lift | Quantifies practical impact in percentage points |
+| Relative lift | Communicates change versus control |
+| Adjusted p-value | Controls false positives across multiple variants |
+| Risk flag | Prevents unreliable experiments entering decisions |
 
 ## Repository structure
 
 ```text
-data/       Clean campaign dataset
-notebooks/  Main analysis notebook
-outputs/    Generated visualizations
-scripts/    Data-generation script
-sql/        KPI aggregation query
+data/                           Download instructions; raw data is excluded
+src/experiment_analysis.py      Reusable experiment-analysis functions and CLI
+tests/test_experiment_analysis.py
+requirements.txt
+.github/workflows/python.yml
 ```
 
-## Selected visualizations
-
-### ROAS and CAC distributions
-
-![ROAS and CAC comparison](outputs/roas_cac_comparison.png)
-
-### Daily conversions
-
-![Daily conversions](outputs/daily_conversions.png)
-
-### Highest-ROAS campaigns
-
-![Top campaigns by ROAS](outputs/top5_campaigns_roas.png)
-
-## Reproduce the analysis
+## Run the analysis
 
 ```bash
 git clone https://github.com/AtifElmasry/ad-bidding-ab-test-zalando-case-study.git
 cd ad-bidding-ab-test-zalando-case-study
+python -m venv .venv
+source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-Open `notebooks/analysis.ipynb`, or review `sql/campaign_kpi_analysis.sql`.
+Download the exploratory packages file following [data/README.md](data/README.md), then run:
 
-## Tools
+```bash
+python src/experiment_analysis.py \
+  --data data/upworthy-archive-exploratory-packages-03.12.2020.csv \
+  --test-id YOUR_TEST_ID
+```
 
-Python, pandas, Seaborn, SQL, MySQL and Jupyter Notebook
+The command prints an arm-level decision table and the sample-ratio-mismatch result.
+
+## Skills demonstrated
+
+Experiment design, KPI definition, data-quality checks, A/B/n testing, confidence intervals, effect sizes, multiple testing, reproducible Python and responsible interpretation.
+
+## Limitations
+
+- Results apply to Upworthy’s historical media context.
+- Aggregate arm data does not support user-level heterogeneity analysis.
+- Statistical significance does not guarantee meaningful business value.
+- A control must be selected before reviewing results to avoid biased comparisons.
+- Tests flagged by the archive’s updated randomization guidance should not be used for confirmatory claims.
 
 ## Author
 
